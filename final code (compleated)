@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0f172a;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, #38bdf833 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveBg 15s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveBg {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        /* Main Container Card */
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 50px auto;
+            background: rgba(30, 41, 59, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 0 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .channel {
+            color: #ff0000;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo {
+            font-size: 70px;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 0 20px #38bdf8;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: #38bdf8;
+            font-size: 50px;
+            margin-top: 10px;
+            text-shadow: 0 0 15px #38bdf8;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        /* Form Controls */
+        input {
+            width: 90%;
+            padding: 16px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            background: #0f172a;
+            color: white;
+            outline: none;
+            border: 2px solid #38bdf8;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        input:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #38bdf8;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #38bdf8, #0ea5e9);
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #38bdf8;
+        }
+
+        /* Fullscreen Result Overlay */
+        .fullscreen-result {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999;
+            text-align: center;
+            padding: 20px;
+            animation: popup 0.4s ease;
+        }
+
+        @keyframes popup {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .fullscreen-result h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px white;
+        }
+
+        .fullscreen-result p {
+            font-size: 22px;
+            max-width: 700px;
+            line-height: 1.5;
+        }
+
+        /* Result Theme States */
+        .safe { background: linear-gradient(135deg, #15803d, #22c55e); }
+        .warning { background: linear-gradient(135deg, #f59e0b, #f97316); }
+        .danger { background: linear-gradient(135deg, #dc2626, #ef4444); }
+
+        .close-btn {
+            margin-top: 25px;
+            background: white;
+            color: black;
+        }
+
+        /* Linear Scanning Loader */
+        .scan-animation {
+            width: 90%;
+            height: 6px;
+            margin: 25px auto 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #1e293b;
+            display: none;
+        }
+
+        .scan-bar {
+            width: 30%;
+            height: 100%;
+            background: #38bdf8;
+            animation: scan 1.5s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        /* About & Description Cards */
+        .about {
+            margin-top: 40px;
+            text-align: left;
+            background: #0f172a;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .about h2 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .about p {
+            line-height: 1.7;
+            color: #e2e8f0;
+        }
+
+        .contact {
+            margin-top: 15px;
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="channel">✅Team Cyber Mindset</div>
+    <div class="logo">🛡️</div>
+    <h1>CyberShield</h1>
+    <p class="subtitle">Advanced Fake Website & Phishing Detector (Currently checks HTTPS & Phishing words)</p>
+    
+    <!-- User Input and Interactive Button -->
+    <input type="text" id="url" placeholder="Enter your Website URL">
+    <br>
+    <button onclick="startScan()">🔍 Scan Website</button>
+    
+    <!-- Scanning Track -->
+    <div class="scan-animation" id="scanLoader">
+        <div class="scan-bar"></div>
+    </div>
+    
+    <!-- Project Meta Description -->
+    <div class="about">
+        <h2>About CyberShield</h2>
+        <p>
+            CyberShield is a cyber security project designed to help users detect suspicious and phishing websites. 
+            It checks HTTPS security parameters and filters dangerous phishing keywords. It is engineered by Team Cyber Mindset.
+        </p>
+        <br>
+        <p>This project was created by Devashish and Dikshit for Codorra 2026 Hackathon.</p>
+        <div class="contact">📞 Contact: 9756210441</div>
+    </div>
+</div>
+
+<!-- Modal Fullscreen Viewport Overlay -->
+<div id="resultScreen" class="fullscreen-result">
+    <h2 id="resultTitle"></h2>
+    <p id="resultText"></p>
+    <button class="close-btn" onclick="closeResult()">Close</button>
+</div>
+
+<script>
+    // Audio Synthesis API to dynamically create alarm frequencies on threat detection
+    function playAlarm() {
+        try {
+            let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let oscillator = audioContext.createOscillator();
+            let gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.type = "sawtooth";
+            oscillator.frequency.setValueAtTime(700, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.5);
+        } catch(e) {
+            console.log("Audio play blocked by browser policy");
+        }
+    }
+
+    // Trigger scanning states and input empty tracking checks
+    function startScan() {
+        let url = document.getElementById("url").value.trim().toLowerCase();
+        let loader = document.getElementById("scanLoader");
+        
+        if (url === "") {
+            showResult("danger", "❌ ENTER URL", "Please enter a website URL.");
+            playAlarm();
+            return;
+        }
+        
+        loader.style.display = "block";
+        
+        setTimeout(() => {
+            loader.style.display = "none";
+            checkURL(url);
+        }, 1500); 
+    }
+
+    // Heuristic parameter evaluation loop
+    function checkURL(url) {
+        let suspiciousWords = [
+            "login", "verify", "bank", "secure", "update", 
+            "free", "gift", "password", "lottery"
+        ];
+
+        let isDanger = false;
+
+        for (let word of suspiciousWords) {
+            if (url.includes(word)) {
+                isDanger = true;
+                break;
+            }
+        }
+
+        if (isDanger) {
+            showResult("danger", "☠️ DANGER WEBSITE DETECTED", "This website contains suspicious phishing keywords. Avoid entering passwords or personal information in this website.");
+            playAlarm();
+        } else if (!url.startsWith("https://")) {
+            showResult("warning", "⚠️ WARNING", "This website is not using HTTPS encryption. Your data may not be secure because HTTPS means secure connection.");
+        } else {
+            showResult("safe", "🛡️ YOU ARE SAFE", "Congratulations! This website appears secure and safe to use. You can use it safely ✅");
+        }
+    }
+
+    // Direct DOM injection to render fullscreen overlays
+    function showResult(type, title, text) {
+        let resultScreen = document.getElementById("resultScreen");
+        let resultTitle = document.getElementById("resultTitle");
+        let resultText = document.getElementById("resultText");
+        
+        resultScreen.style.display = "flex";
+        resultScreen.className = "fullscreen-result " + type;
+        resultTitle.innerHTML = title;
+        resultText.innerHTML = text;
+    }
+
+    // Reset view modal
+    function closeResult() {
+        document.getElementById("resultScreen").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
