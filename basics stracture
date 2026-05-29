@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberShieldAI</title>
+    <title>CyberShield</title>
     <style>
         * { 
             margin: 0; 
@@ -177,12 +177,12 @@
 <div class="container">
     <div class="channel">✅Team Cyber Mindset</div>
     <div class="logo">🛡️</div>
-    <h1>CyberShieldAI</h1>
-    <p class="subtitle">Advanced Fake Website & Phishing Detector(our this version work on https only we will make changes in fucture)</p>
+    <h1>CyberShield</h1>
+    <p class="subtitle">Advanced Fake Website & Phishing Detectorour (this version work on https only we will make changes in fucture)</p>
     
     <input type="text" id="url" placeholder="Enter your Website URL">
     <br>
-    <button>🔍 Scan Website</button>
+    <button onclick="startScan()">🔍 Scan Website</button> 
     
     <div class="scan-animation" id="scanLoader">
         <div class="scan-bar"></div>
@@ -190,12 +190,31 @@
     
     <div class="about">
         <h2>About CyberShield</h2>
-        <p>CyberShield is a cyber security project designed to help users detect suspicious and phishing websites.</p>
-        <br>
-        <p>This project was created by Devashish and Dikshit for Codorra 2026 Hackathon.</p>
+        <p>CyberShield is a cyber security project designed to help users detect suspicious and phishing websites.
+        
+        This project was created by Devashish and Dikshit for Codorra 2026 Hackathon.</p>
         <div class="contact">📞 Contact: 9756210441</div>
     </div>
 </div>
+
+<script>
+    function startScan() {
+        let url = document.getElementById("url").value.trim().toLowerCase();
+        let loader = document.getElementById("scanLoader");
+        
+        if (url === "") { 
+            alert("Please enter a website URL."); 
+            return; 
+        }
+        
+        loader.style.display = "block";
+        
+        setTimeout(() => {
+            loader.style.display = "none";
+            alert("Scan Engine complete. Parsing parameters active...");
+        }, 1500); 
+    }
+</script>
 
 </body>
 </html>
