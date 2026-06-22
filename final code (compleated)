@@ -322,7 +322,7 @@
             showResult("danger", "☠️ DANGER WEBSITE DETECTED", "This website contains suspicious phishing keywords. Avoid entering passwords or personal information in this website.");
             playAlarm();
         } else if (!url.startsWith("https://")) {
-            showResult("warning", "⚠️ WARNING", "This website is not using HTTPS encryption. Your data may not be secure because HTTPS means secure connection.");
+            showResult("warning", "WARNING", "This website is not using HTTPS encryption. Your data may not be secure because HTTPS means secure connection.");
         } else {
             showResult("safe", "🛡️ YOU ARE SAFE", "Congratulations! This website appears secure and safe to use. You can use it safely ✅");
         }
